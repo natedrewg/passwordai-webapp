@@ -1,5 +1,5 @@
 # passwordai
-An AI-powered program to calculate the strength of a password.
+An AI-powered web-app to calculate the strength of a password.
 
 With this project, we are combining the strength of AI with pyscript. 
 
