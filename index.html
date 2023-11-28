@@ -63,7 +63,7 @@ def transformPassword(pWord):
   return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
 def finale(pas):
-  with open('/natedrewg/passwordai-webapp/pickle_func.p', 'r') as f: rfc = pickle.load(f)
+  with open(pickle_func.p, 'r') as f: rfc = pickle.load(f)
   pasw = rfc.predict(pas)
   return pasw
         
