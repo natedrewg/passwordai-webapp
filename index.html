@@ -39,9 +39,15 @@
 <body>
 
 <!-- write your Python code in py-script tag -->
+<py-env>
+  - numpy
+</py-env>
+
 <py-script>
 from js import document,alert
-from joblib import load
+import pickle
+import numpy as np
+
 
 def transformPassword(pWord):
   length = len(pWord)
@@ -57,16 +63,16 @@ def transformPassword(pWord):
   return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
 def finale(pas):
-  passpred = load('randomForestPassword')
+  with open('pickle_func.p', 'rb') as f: rfc = pickle.load(f)
   pasw = rfc.predict(pas)
   return pasw
         
     
 def check(*ags, **kws):
   password = document.getElementById('password').value;
-  transpass = transformPassword(password)
-  result= finale(transpass)
-  pyscript.write("result",result)    
+  transpass = transformPassword("hello")
+  result = finale(transpass)
+  pyscript.write("result", result)    
 </py-script>    
 
     <div class="container" >
