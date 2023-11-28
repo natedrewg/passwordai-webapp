@@ -72,7 +72,7 @@ def transformPassword(pWord):
   return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
 def finale(pas):
-  url = "https://pickle-file.s3.amazonaws.com/pickle_func.p"
+  url = "https://drive.google.com/file/d/1nGn0f2vTPfQa5FiiZ3SqZvyxAOV_D-_6/view?usp=drive_link"
   rfc = pickle.load(StrToBytes(open_url(url)))
   pasw = rfc.predict(pas)
   return pasw
