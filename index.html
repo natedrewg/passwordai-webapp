@@ -34,39 +34,45 @@
         width: auto;
       }
     </style>  
-    
+    <py-env>
+      - pandas 
+      - numpy
+      - scikit-learn
+    </py-env>
 </head>
+
 <body>
 
-<!-- write your Python code in py-script tag -->
+<!-- Python code in py-script tag -->
 <py-script>
-from js import document,alert
-from joblib import load
 
-def transformPassword(pWord):
-  length = len(pWord)
-  charNum = 0
-  if (pWord.isalpha()==0 & pWord.isdigit()==0):
-      charNum = 1
-  capLetter = 0
-  if (pWord.upper() != pWord and pWord.lower() != pWord):
-    capLetter = 1
-  specialChar = 1
-  if(pWord.isalnum()==1):
-    specialChar = 0
-  return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
+  from js import document,alert
+  import pickle
+  import numpy as np
 
-def finale(pas):
-  passpred = load('randomForestPassword')
-  pasw = rfc.predict(pas)
-  return pasw
-        
-    
-def check(*ags, **kws):
-  password = document.getElementById('password').value;
-  transpass = transformPassword(password)
-  result= finale(transpass)
-  pyscript.write("result",result)    
+  def transformPassword(pWord):
+    length = len(pWord)
+    charNum = 0
+    if (pWord.isalpha()==0 & pWord.isdigit()==0):
+        charNum = 1
+    capLetter = 0
+    if (pWord.upper() != pWord and pWord.lower() != pWord):
+      capLetter = 1
+    specialChar = 1
+    if(pWord.isalnum()==1):
+      specialChar = 0
+    return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
+
+  def finale(pas):
+    passpred = pickle.loads('randomForestPassword')
+    pasw = passpred.predict(pas)
+    return pasw
+          
+  def check(*ags, **kws):
+    password = document.getElementById('password').value;
+    transpass = transformPassword(password)
+    result = finale(transpass)
+    pyscript.write("result",result)    
 </py-script>    
 
     <div class="container" >
