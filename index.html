@@ -47,7 +47,16 @@
 from js import document,alert
 import pickle
 import numpy as np
+import os
+from pyodide.http import open_url
 
+class StrToBytes:
+    def __init__(self, fileobj):
+        self.fileobj = fileobj
+    def read(self, size):
+        return self.fileobj.read(size).encode()
+    def readline(self, size=-1):
+        return self.fileobj.readline(size).encode()
 
 def transformPassword(pWord):
   length = len(pWord)
@@ -63,7 +72,8 @@ def transformPassword(pWord):
   return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
 def finale(pas):
-  with open('pickle_func', 'r') as f: rfc = pickle.load(f)
+  url = "https://pickle-file.s3.amazonaws.com/pickle_func.p"
+  rfc = pickle.load(StrToBytes(open_url(url)))
   pasw = rfc.predict(pas)
   return pasw
         
