@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    
         <title> Password Checker </title>
-
+    
     <!-- Pyscript -->
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <!--<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />-->
-
+    
     <!-- bootstrap for styling , Pyscript can also be used for styling instead of bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <style>
-
+    
     html {
       align-items: center;
       padding-left:13%;
@@ -34,48 +34,38 @@
         width: auto;
       }
     </style>  
-    <py-env>
-      - pandas 
-      - numpy
-      - scikit-learn
-    </py-env>
+    
 </head>
 <body>
 
-<!-- Python code in py-script tag -->
+<py-config src="./pyscript.toml"></py-config>
+<py-script src="./main.py"></py-script>
+
+
 <py-script>
+from js import document,alert
+import pickle
+import numpy as np
+import os
+from pyodide.http import open_url
+from urllib.request import urlopen
 
-  from js import document,alert
-  import pickle
-  import numpy as np
+def finale(pas, url):
+  rfc = pickle.load(cv.get_bytes(url))
+  pasw = rfc.predict(pas)
+  return pasw
+        
 
-def transformPassword(pWord):
-  length = len(pWord)
-  charNum = 0
-  if (pWord.isalpha()==0 & pWord.isdigit()==0):
-      charNum = 1
-  capLetter = 0
-  if (pWord.upper() != pWord and pWord.lower() != pWord):
-    capLetter = 1
-  specialChar = 1
-  if(pWord.isalnum()==1):
-    specialChar = 0
-  return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
-
-  def finale(pas):
-    passpred = pickle.loads('randomForestPassword')
-    pasw = passpred.predict(pas)
-    return pasw
-          
-  def check(*ags, **kws):
-    password = document.getElementById('password').value;
-    transpass = transformPassword(password)
-    result = finale(transpass)
-    pyscript.write("result",result)    
+def check(*ags, **kws):
+  password = document.getElementById('password').value;
+  url = document.getElementById('url').value;
+  transpass = transformPassword("hello")
+  result = finale(transpass, url)
+  pyscript.write("result", result)    
 </py-script>    
 
     <div class="container" >
-
+        
         <h1 class="text-center">
             Password Strength Checker
         </h1>
@@ -84,18 +74,18 @@ def transformPassword(pWord):
         <p><h3>Enter your "super strong" password:</h3>
         <input id="password" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Enter Password Here" /></p>
         <center>
-            <button id="check" type="submit"  class="btn btn-dark" pys-onClick="check">Check</button>
+            <button id="check" type="submit"  class="btn btn-dark" pys-onClick=get_prediction()>Check</button>
 
         </center>
-
+        
         <p>
         <h4>Result:</h4>
         <textarea id="result" class="form-control" rows="2" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Result"></textarea></p>
-
+    
         <center>
           <img src="Eastern.png" alt="Eastern Logo">
         </center>
-    </div>
-
+    </div>    
+    
     </body>
     </html>

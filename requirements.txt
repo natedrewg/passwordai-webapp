@@ -2,8 +2,6 @@ ipykernel
 pandas
 numpy
 scikit-learn
-seaborn
-flask
 jsonify
 requests
 uvicorn
