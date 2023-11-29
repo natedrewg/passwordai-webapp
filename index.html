@@ -43,12 +43,14 @@
   - numpy
 </py-env>
 
+
 <py-script>
 from js import document,alert
 import pickle
 import numpy as np
 import os
 from pyodide.http import open_url
+from urllib.request import urlopen
 
 class StrToBytes:
   def __init__(self, fileobj):
@@ -73,8 +75,7 @@ def transformPassword(pWord):
   return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
 def finale(pas):
-  url = "https://drive.google.com/file/d/1nGn0f2vTPfQa5FiiZ3SqZvyxAOV_D-_6/view?usp=drive_link"
-  rfc = pickle.load(StrToBytes(open_url(url)))
+  rfc = pickle.load(urlopen("https://drive.google.com/file/d/1nGn0f2vTPfQa5FiiZ3SqZvyxAOV_D-_6"))
   pasw = rfc.predict(pas)
   return pasw
         
