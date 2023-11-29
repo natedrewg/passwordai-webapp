@@ -6,7 +6,7 @@ import pickle
 
 #Disable warnings by pyscript appearing in the browser.
 import warnings
-warning.filterwarnings("ignore")
+warnings.filterwarnings("ignore")
 
 #Load pickle file 
 with open("rfc.pkl", "rb") as f:
