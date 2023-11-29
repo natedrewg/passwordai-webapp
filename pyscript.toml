@@ -1,0 +1,4 @@
+packages = ["xgboost", "pandas"]
+[[fetch]]
+from = 'https://raw.githubusercontent.com/LakshmanKishore/irisClassification/main/xgb_model.json'
+name = "Iris XGBoost"
