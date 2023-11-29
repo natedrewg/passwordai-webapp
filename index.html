@@ -49,18 +49,17 @@
             Password Strength Checker
         </h1>
         <br />
-        
-        <p><h3>Enter your "super strong" password:</h3>
-        <input required id="password" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Enter Password Here" /></p>
-        <center>
-            <button id="check" type="submit"  class="btn btn-dark" pys-onClick='get_prediction()'>Check</button>
+        <form action="" method="dialog">
+          <p><h3>Enter your "super strong" password:</h3>
+          <input required id="password" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Enter Password Here" /></p>
+          <center>
+            <button id="check" type="submit"  class="btn btn-dark" pys-onClick=get_prediction()>Check</button>
+          </center>
+          <p>
+          <h4>Result:</h4>
+          <textarea id="result" class="form-control" rows="2" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Result"></textarea></p>  
+        </form>
 
-        </center>
-        
-        <p>
-        <h4>Result:</h4>
-        <textarea id="result" class="form-control" rows="2" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Result"></textarea></p>
-    
         <center>
           <img src="Eastern.png" alt="Eastern Logo">
         </center>

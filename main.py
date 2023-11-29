@@ -32,6 +32,6 @@ def get_prediction():
   finale = np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
 #Predicting on the array
-  prediction = loaded_model.predict([finale])
-
-  return prediction
+  result = loaded_model.predict([finale])
+  print(result)
+  return result
