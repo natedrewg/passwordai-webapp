@@ -2,8 +2,10 @@ ipykernel
 pandas
 numpy
 scikit-learn
+seaborn
+jupyterlab
+flask
 jsonify
 requests
 uvicorn
 gunicorn
-xgboost

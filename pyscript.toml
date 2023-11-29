@@ -1,4 +1,4 @@
-packages = ["xgboost", "pandas"]
+packages = ["pandas", "scikit-learn"]
 [[fetch]]
-from = 'https://raw.githubusercontent.com/LakshmanKishore/irisClassification/main/xgb_model.json'
-name = "Iris XGBoost"
+from = ''
+name = "Password Pickle"

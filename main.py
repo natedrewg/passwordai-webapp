@@ -1,15 +1,23 @@
-import xgboost as xgb
+import numpy as np
 import pandas as pd
 from pyscript import Element
 from js import document, window
-import numpy as np
+import pickle
 
-classes = ["0","1","2"]
+#Disable warnings by pyscript appearing in the browser.
+import warnings
+warning.filterwarnings("ignore")
 
-loaded_model = xgb.Booster()
-loaded_model.load_model("xgb_model.json")
+#Load pickle file 
+with open("rfc.pkl", "rb") as f:
+  loaded_model = pickle.load(f)
 
-def transformPassword(pWord):
+
+def get_prediction():
+#Insert password from HTML-User
+  pWord = document.getElementById('password').value;
+
+#Setting up array
   length = len(pWord)
   charNum = 0
   if (pWord.isalpha()==0 & pWord.isdigit()==0):
@@ -20,21 +28,10 @@ def transformPassword(pWord):
   specialChar = 1
   if(pWord.isalnum()==1):
     specialChar = 0
-  return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
+#Setting up array
+  finale = np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
-def get_prediction():
-  try:
-    pas = str(Element("password").value)
+#Predicting on the array
+  prediction = loaded_model.predict([finale])
 
-  except:
-    # window.alert("Please Enter valid values!")
-    return 0
-  
-  sample_test_record = pd.DataFrame([{
-      transformPassword(pas)
-  }])
-  prediction = loaded_model.predict(xgb.DMatrix(sample_test_record))
-
-  # print("Predicted class for the above sample_test_record:",predicted_class)
-  
   return prediction
