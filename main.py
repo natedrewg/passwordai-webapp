@@ -1,5 +1,5 @@
-import numpy as np
 import pandas as pd
+import numpy as np
 from pyscript import Element
 from js import document, window
 import pickle

@@ -1,4 +1,4 @@
 packages = ["pandas", "scikit-learn"]
 [[fetch]]
-from = ''
+from = 'https://github.com/natedrewg/passwordai-webapp/blob/main/rfc.pkl'
 name = "Password Pickle"
