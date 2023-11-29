@@ -42,6 +42,7 @@
 <py-env>
   - numpy
 </py-env>
+<py-config src="./pyscript.toml"></py-config>
 
 
 <py-script>
@@ -74,16 +75,17 @@ def transformPassword(pWord):
     specialChar = 0
   return np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
-def finale(pas):
-  rfc = pickle.load(urlopen("https://drive.google.com/file/d/1nGn0f2vTPfQa5FiiZ3SqZvyxAOV_D-_6"))
+def finale(pas, url):
+  rfc = pickle.load(cv.get_bytes(url))
   pasw = rfc.predict(pas)
   return pasw
         
-    
+
 def check(*ags, **kws):
   password = document.getElementById('password').value;
+  url = document.getElementById('url').value;
   transpass = transformPassword("hello")
-  result = finale(transpass)
+  result = finale(transpass, url)
   pyscript.write("result", result)    
 </py-script>    
 
@@ -93,6 +95,7 @@ def check(*ags, **kws):
             Password Strength Checker
         </h1>
         <br />
+        
         <p><h3>Enter your "super strong" password:</h3>
         <input id="password" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Enter Password Here" /></p>
         <center>
