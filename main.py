@@ -1,21 +1,23 @@
 import pandas as pd
 import numpy as np
 from pyscript import Element
-from js import document, window
+from js import document
 import pickle
 
-#Disable warnings by pyscript appearing in the browser.
-import warnings
-warnings.filterwarnings("ignore")
 
+def print():
+  result = document.getElementById('password').value;
+  pyscript.write("result",result)
+
+def check():
 #Load pickle file 
-with open("rfc.pkl", "rb") as f:
-  loaded_model = pickle.load(f)
+  with open("rfc.pkl", "rb") as f:
+    loaded_model = pickle.load(f)
+  
 
 
-def get_prediction():
 #Insert password from HTML-User
-  pWord = document.getElementById('password').value;
+  pWord = document.querySelector("#password").value
 
 #Setting up array
   length = len(pWord)
@@ -32,6 +34,7 @@ def get_prediction():
   finale = np.array([length, charNum, capLetter, specialChar]).reshape(1, -1)
 
 #Predicting on the array
-  result = loaded_model.predict([finale])
-  print(result)
-  return result
+  result = loaded_model.predict(finale)
+
+  pyscript.write("result",result[0])  
+  
