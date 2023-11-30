@@ -4,11 +4,6 @@ from pyscript import Element
 from js import document
 import pickle
 
-
-def print():
-  result = document.getElementById('password').value;
-  pyscript.write("result",result)
-
 def check():
 #Load pickle file 
   with open("rfc.pkl", "rb") as f:
@@ -18,6 +13,7 @@ def check():
 
 #Insert password from HTML-User
   pWord = document.querySelector("#password").value
+
 
 #Setting up array
   length = len(pWord)
@@ -35,6 +31,23 @@ def check():
 
 #Predicting on the array
   result = loaded_model.predict(finale)
+  if result == 0:
+    result = 'Weak'
+    num = 33
+    document.getElementsByClassName('progress-bar').item(0).setAttribute('style','width:'+str(num)+'%')
+  elif result == 1:
+    result = 'Okay'
+    num = 66
+    document.getElementsByClassName('progress-bar').item(0).setAttribute('style','width:'+str(num)+'%')
+  else:
+    result = 'Strong'
+    num = 100
+    document.getElementsByClassName('progress-bar').item(0).setAttribute('style','width:'+str(num)+'%')
 
-  pyscript.write("result",result[0])  
+  if pWord == '':
+    num = 0
+    result = 'None'
+    document.getElementsByClassName('progress-bar').item(0).setAttribute('style','width:'+str(num)+'%')
+
+  pyscript.write("result",result)  
   

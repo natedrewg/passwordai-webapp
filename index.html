@@ -30,19 +30,37 @@
             Password Strength Checker
         </h1>
         <br />
-        <form action="" method="dialog">
+        <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6"> 
+                 <form action="" method="dialog">
           <p><h3>Enter your "super strong" password:</h3>
           <input id="password" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Enter Password Here" /></p>
-          <button id="check" type="submit"  class="btn btn-dark" py-click="check()">Check</button>
+          <center><button id="check" type="submit"  class="btn btn-dark" py-click="check()">Check</button></center>
         </form>
         
         <p>
-        <h4>Result:</h4>
-        <textarea id="result" class="form-control" rows="2" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Result"></textarea></p>  
+        <center><h4>Result:</h4></center>
+       
+        <center><b><span id="result"></span></b></center>
+        </p>  
+        <div class="w-100">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+          </div>
+        </div>
+        
         
         <center>
           <img src="Eastern.png" alt="Eastern Logo">
         </center>
+        </div>
+        <div class="col-lg-6">
+
+        </div>
+      </div>
+    </div>
+
     </div>    
     
     </body>
